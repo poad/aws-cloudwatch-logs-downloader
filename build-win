@@ -1,0 +1,16 @@
+const builder = require('electron-builder');
+
+builder.build({
+    config: {
+        'appId': 'local.test.aws-cloudwatch-logs-downloader',
+        'win':{
+            'target': {
+                'target': 'zip',
+                'arch': [
+                    'x64',
+                    'arm64',
+                ]
+            }
+        }
+    }
+});

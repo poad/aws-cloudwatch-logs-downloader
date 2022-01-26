@@ -1,0 +1,47 @@
+name: Build and Test
+ 
+on:
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Pull request auto merge enabler
+        if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
+        uses: poad/github-pull-request-auto-merge-enable-action@v1.0.1
+        with:
+          pull_request_id: ${{ github.event.pull_request.node_id }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.event.repository.name }}
+          owner: ${{ github.repository_owner }}
+          merge_method: SQUASH
+
+  electron-test:
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
+
+      - name: lint
+        if: github.token != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn install && yarn lint:fix && yarn build
+
+      - name: build
+        if: github.token == ''
+        run: yarn install && yarn build

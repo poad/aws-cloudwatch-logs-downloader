@@ -1,0 +1,10 @@
+const builder = require('electron-builder');
+
+builder.build({
+    config: {
+        'appId': 'local.test.aws-cloudwatch-logs-downloader',
+        'linux':{
+            'target': 'tar.gz',
+        }
+    }
+});
