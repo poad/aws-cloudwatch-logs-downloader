@@ -22,11 +22,11 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "^3.49.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.50.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.4.0",
+    "@mui/icons-material": "^5.4.1",
+    "@mui/material": "^5.4.1",
     "electron-is-dev": "^2.0.0",
     "electron-next": "^3.1.5",
     "react": "^17.0.2",
