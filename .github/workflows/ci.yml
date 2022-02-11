@@ -1,11 +1,28 @@
 name: Build and Test
  
 on:
-  pull_request:
+  pull_request_target:
+    branches:
+      - main
+  push:
     branches:
       - main
 
   workflow_dispatch:
+
+
+permissions:
+  actions: read
+  checks: write
+  contents: none
+  deployments: none
+  id-token: write
+  issues: none
+  packages: none
+  pull-requests: write
+  repository-projects: none
+  security-events: write
+  statuses: write
 
 jobs:
   configure:
@@ -28,20 +45,22 @@ jobs:
         node-version: [16.x]
 
     runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
     steps:
       - uses: actions/checkout@v2
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.IAM_ROLE_NAME }}
+          role-session-name: GitHubActions
+          aws-region: us-west-2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
-
-      - name: lint
-        if: github.token != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AWS_RESION: us-west-2
-        run: yarn install && yarn lint:fix && yarn build
 
       - name: build
         if: github.token == ''
