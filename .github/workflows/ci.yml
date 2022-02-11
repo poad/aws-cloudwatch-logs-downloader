@@ -40,6 +40,7 @@ jobs:
         if: github.token != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_RESION: us-west-2
         run: yarn install && yarn lint:fix && yarn build
 
       - name: build
