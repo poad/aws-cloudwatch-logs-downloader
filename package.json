@@ -24,7 +24,7 @@
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "^3.51.0",
     "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.4.2",
     "@mui/material": "^5.4.2",
     "electron-is-dev": "^2.0.0",
