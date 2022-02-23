@@ -6,13 +6,13 @@ on:
 permissions:
   actions: read
   checks: write
-  contents: none
+  contents: write
   deployments: none
-  id-token: write
-  issues: none
+  id-token: read
+  issues: write
   packages: none
   pull-requests: write
-  repository-projects: none
+  repository-projects: read
   security-events: write
   statuses: write
 
