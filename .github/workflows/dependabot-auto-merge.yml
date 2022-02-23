@@ -8,7 +8,7 @@ permissions:
   checks: write
   contents: write
   deployments: none
-  id-token: read
+  id-token: write
   issues: write
   packages: none
   pull-requests: write
