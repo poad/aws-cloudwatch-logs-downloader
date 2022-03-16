@@ -22,7 +22,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "^3.54.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.54.1",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.5.1",
