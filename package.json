@@ -55,9 +55,6 @@
     "rimraf": "*",
     "typescript": "*"
   },
-  "resolutions": {
-    "async": "^3.2.2"
-  },
   "build": {
     "asar": true,
     "files": [
