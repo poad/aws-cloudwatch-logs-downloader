@@ -2548,9 +2548,9 @@ file-entry-cache@^6.0.1:
     flat-cache "^3.0.4"
 
 filelist@^1.0.1:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/filelist/-/filelist-1.0.3.tgz#448607750376484932f67ef1b9ff07386b036c83"
-  integrity sha512-LwjCsruLWQULGYKy7TX0OPtrL9kLpojOFKc5VCTxdFTV7w5zbsgqVKfnkKG7Qgjtq50gKfO56hJv88OfcGb70Q==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/filelist/-/filelist-1.0.4.tgz#f78978a1e944775ff9e62e744424f215e58352b5"
+  integrity sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==
   dependencies:
     minimatch "^5.0.1"
 
