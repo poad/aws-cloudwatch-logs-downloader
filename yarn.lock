@@ -693,9 +693,9 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/types@^7.18.6":
-  version "7.18.6"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.18.6.tgz#5d781dd10a3f0c9f1f931bd19de5eb26ec31acf0"
-  integrity sha512-NdBNzPDwed30fZdDQtVR7ZgaO4UKjuaQFH9VArS+HMnurlOY0JWN+4ROlu/iapMFwjRQU4pOG4StZfDmulEwGA==
+  version "7.18.7"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.18.7.tgz#a4a2c910c15040ea52cdd1ddb1614a65c8041726"
+  integrity sha512-QG3yxTcTIBoAcQmkCs+wAPYZhu7Dk9rXKacINfNbdJDNERTbLQbHGyVG8q/YGMPeCJRIhSY0+fTc5+xuh6WPSQ==
   dependencies:
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
@@ -1703,9 +1703,9 @@ camelcase@^6.2.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001332:
-  version "1.0.30001359"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001359.tgz#a1c1cbe1c2da9e689638813618b4219acbd4925e"
-  integrity sha512-Xln/BAsPzEuiVLgJ2/45IaqD9jShtk3Y33anKb4+yLwQzws3+v6odKfpgES/cDEaZMLzSChpIGdbOYtH9MyuHw==
+  version "1.0.30001361"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001361.tgz#ba2adb2527566fb96f3ac7c67698ae7fc495a28d"
+  integrity sha512-ybhCrjNtkFji1/Wto6SSJKkWk6kZgVQsDq5QI83SafsF6FXv2JB4df9eEdH6g8sdGgqTXrFLjAxqBGgYoU3azQ==
 
 chalk@^2.0.0:
   version "2.4.2"
