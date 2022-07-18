@@ -1,14 +1,13 @@
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/esm/objectWithoutPropertiesLoose";
-const _excluded = ["children", "className", "component", "components", "componentsProps", "disabled", "value", "label"];
+const _excluded = ["children", "component", "components", "componentsProps", "disabled", "value", "label"];
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { unstable_useForkRef as useForkRef } from '@mui/utils';
 import composeClasses from '../composeClasses';
 import { SelectUnstyledContext } from '../SelectUnstyled/SelectUnstyledContext';
 import { getOptionUnstyledUtilityClass } from './optionUnstyledClasses';
-import appendOwnerState from '../utils/appendOwnerState';
+import { useSlotProps } from '../utils';
 import { jsx as _jsx } from "react/jsx-runtime";
 
 function useUtilityClasses(ownerState) {
@@ -30,7 +29,6 @@ function useUtilityClasses(ownerState) {
 const OptionUnstyled = /*#__PURE__*/React.forwardRef(function OptionUnstyled(props, ref) {
   const {
     children,
-    className,
     component,
     components = {},
     componentsProps = {},
@@ -78,10 +76,16 @@ const OptionUnstyled = /*#__PURE__*/React.forwardRef(function OptionUnstyled(pro
     }
   }, [optionState.highlighted, listboxRef]);
   const classes = useUtilityClasses(ownerState);
-  const rootProps = appendOwnerState(Root, _extends({}, other, optionProps, componentsProps.root, {
-    ref: handleRef,
-    className: clsx(classes.root, className, componentsProps.root?.className)
-  }), ownerState);
+  const rootProps = useSlotProps({
+    elementType: Root,
+    externalSlotProps: componentsProps.root,
+    externalForwardedProps: other,
+    additionalProps: _extends({}, optionProps, {
+      ref: handleRef
+    }),
+    className: classes.root,
+    ownerState
+  });
   return /*#__PURE__*/_jsx(Root, _extends({}, rootProps, {
     children: children
   }));
@@ -98,11 +102,6 @@ process.env.NODE_ENV !== "production" ? OptionUnstyled.propTypes
    * @ignore
    */
   children: PropTypes.node,
-
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
 
   /**
    * The component used for the Root slot.
@@ -126,7 +125,7 @@ process.env.NODE_ENV !== "production" ? OptionUnstyled.propTypes
    * @default {}
    */
   componentsProps: PropTypes.shape({
-    root: PropTypes.object
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   }),
 
   /**

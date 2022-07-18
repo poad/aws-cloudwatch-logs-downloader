@@ -13,8 +13,6 @@ var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runt
 
 var _react = _interopRequireDefault(require("react"));
 
-var _clsx = _interopRequireDefault(require("clsx"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _utils = require("@mui/utils");
@@ -25,11 +23,11 @@ var _SelectUnstyledContext = require("../SelectUnstyled/SelectUnstyledContext");
 
 var _optionUnstyledClasses = require("./optionUnstyledClasses");
 
-var _appendOwnerState = _interopRequireDefault(require("../utils/appendOwnerState"));
+var _utils2 = require("../utils");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-const _excluded = ["children", "className", "component", "components", "componentsProps", "disabled", "value", "label"];
+const _excluded = ["children", "component", "components", "componentsProps", "disabled", "value", "label"];
 
 function useUtilityClasses(ownerState) {
   const {
@@ -48,11 +46,8 @@ function useUtilityClasses(ownerState) {
 
 
 const OptionUnstyled = /*#__PURE__*/_react.default.forwardRef(function OptionUnstyled(props, ref) {
-  var _componentsProps$root;
-
   const {
     children,
-    className,
     component,
     components = {},
     componentsProps = {},
@@ -102,10 +97,16 @@ const OptionUnstyled = /*#__PURE__*/_react.default.forwardRef(function OptionUns
   }, [optionState.highlighted, listboxRef]);
 
   const classes = useUtilityClasses(ownerState);
-  const rootProps = (0, _appendOwnerState.default)(Root, (0, _extends2.default)({}, other, optionProps, componentsProps.root, {
-    ref: handleRef,
-    className: (0, _clsx.default)(classes.root, className, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.className)
-  }), ownerState);
+  const rootProps = (0, _utils2.useSlotProps)({
+    elementType: Root,
+    externalSlotProps: componentsProps.root,
+    externalForwardedProps: other,
+    additionalProps: (0, _extends2.default)({}, optionProps, {
+      ref: handleRef
+    }),
+    className: classes.root,
+    ownerState
+  });
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(Root, (0, _extends2.default)({}, rootProps, {
     children: children
   }));
@@ -123,11 +124,6 @@ process.env.NODE_ENV !== "production" ? OptionUnstyled.propTypes
    * @ignore
    */
   children: _propTypes.default.node,
-
-  /**
-   * @ignore
-   */
-  className: _propTypes.default.string,
 
   /**
    * The component used for the Root slot.
@@ -151,7 +147,7 @@ process.env.NODE_ENV !== "production" ? OptionUnstyled.propTypes
    * @default {}
    */
   componentsProps: _propTypes.default.shape({
-    root: _propTypes.default.object
+    root: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.object])
   }),
 
   /**

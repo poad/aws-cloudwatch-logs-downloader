@@ -172,7 +172,7 @@ interface UseListboxRootSlotOwnProps {
     tabIndex: number;
     ref: React.Ref<any>;
 }
-export declare type UseListboxRootSlotProps<TOther = {}> = Omit<TOther, keyof UseListboxRootSlotOwnProps> & UseListboxRootSlotOwnProps;
+export declare type UseListboxRootSlotProps<TOther = {}> = TOther & UseListboxRootSlotOwnProps;
 interface UseListboxOptionSlotOwnProps {
     'aria-disabled': React.AriaAttributes['aria-disabled'];
     'aria-selected': React.AriaAttributes['aria-selected'];

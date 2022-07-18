@@ -1,13 +1,12 @@
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { unstable_useForkRef as useForkRef } from '@mui/utils';
 import composeClasses from '../composeClasses';
 import { SelectUnstyledContext } from '../SelectUnstyled/SelectUnstyledContext';
 import { getOptionUnstyledUtilityClass } from './optionUnstyledClasses';
-import appendOwnerState from '../utils/appendOwnerState';
+import { useSlotProps } from '../utils';
 import { jsx as _jsx } from "react/jsx-runtime";
 
 function useUtilityClasses(ownerState) {
@@ -25,10 +24,7 @@ function useUtilityClasses(ownerState) {
 
 
 var OptionUnstyled = /*#__PURE__*/React.forwardRef(function OptionUnstyled(props, ref) {
-  var _componentsProps$root;
-
   var children = props.children,
-      className = props.className,
       component = props.component,
       _props$components = props.components,
       components = _props$components === void 0 ? {} : _props$components,
@@ -37,7 +33,7 @@ var OptionUnstyled = /*#__PURE__*/React.forwardRef(function OptionUnstyled(props
       disabled = props.disabled,
       value = props.value,
       label = props.label,
-      other = _objectWithoutProperties(props, ["children", "className", "component", "components", "componentsProps", "disabled", "value", "label"]);
+      other = _objectWithoutProperties(props, ["children", "component", "components", "componentsProps", "disabled", "value", "label"]);
 
   var selectContext = React.useContext(SelectUnstyledContext);
 
@@ -77,10 +73,16 @@ var OptionUnstyled = /*#__PURE__*/React.forwardRef(function OptionUnstyled(props
     }
   }, [optionState.highlighted, listboxRef]);
   var classes = useUtilityClasses(ownerState);
-  var rootProps = appendOwnerState(Root, _extends({}, other, optionProps, componentsProps.root, {
-    ref: handleRef,
-    className: clsx(classes.root, className, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.className)
-  }), ownerState);
+  var rootProps = useSlotProps({
+    elementType: Root,
+    externalSlotProps: componentsProps.root,
+    externalForwardedProps: other,
+    additionalProps: _extends({}, optionProps, {
+      ref: handleRef
+    }),
+    className: classes.root,
+    ownerState: ownerState
+  });
   return /*#__PURE__*/_jsx(Root, _extends({}, rootProps, {
     children: children
   }));
@@ -97,11 +99,6 @@ process.env.NODE_ENV !== "production" ? OptionUnstyled.propTypes
    * @ignore
    */
   children: PropTypes.node,
-
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
 
   /**
    * The component used for the Root slot.
@@ -125,7 +122,7 @@ process.env.NODE_ENV !== "production" ? OptionUnstyled.propTypes
    * @default {}
    */
   componentsProps: PropTypes.shape({
-    root: PropTypes.object
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   }),
 
   /**

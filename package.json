@@ -19,6 +19,7 @@
     "dist:linux": "node build-linux",
     "dist:windows": "node build-win",
     "dist": "yarn dist:windows && yarn dist:mac && yarn dist:linux",
+    "package": "echo skip",
     "type-check": "tsc"
   },
   "dependencies": {

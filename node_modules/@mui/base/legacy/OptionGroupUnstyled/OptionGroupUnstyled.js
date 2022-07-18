@@ -1,10 +1,10 @@
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import composeClasses from '../composeClasses';
 import { getOptionGroupUnstyledUtilityClass } from './optionGroupUnstyledClasses';
+import { useSlotProps } from '../utils';
 import { jsx as _jsx } from "react/jsx-runtime";
 import { jsxs as _jsxs } from "react/jsx-runtime";
 
@@ -30,37 +30,41 @@ function useUtilityClasses(disabled) {
 
 
 var OptionGroupUnstyled = /*#__PURE__*/React.forwardRef(function OptionGroupUnstyled(props, ref) {
-  var _componentsProps$root, _componentsProps$labe, _componentsProps$list;
-
-  var className = props.className,
-      component = props.component,
+  var component = props.component,
       _props$components = props.components,
       components = _props$components === void 0 ? {} : _props$components,
       _props$disabled = props.disabled,
       disabled = _props$disabled === void 0 ? false : _props$disabled,
       _props$componentsProp = props.componentsProps,
       componentsProps = _props$componentsProp === void 0 ? {} : _props$componentsProp,
-      other = _objectWithoutProperties(props, ["className", "component", "components", "disabled", "componentsProps"]);
+      other = _objectWithoutProperties(props, ["component", "components", "disabled", "componentsProps"]);
 
   var Root = component || (components == null ? void 0 : components.Root) || 'li';
   var Label = (components == null ? void 0 : components.Label) || 'span';
   var List = (components == null ? void 0 : components.List) || 'ul';
   var classes = useUtilityClasses(disabled);
-
-  var rootProps = _extends({}, other, {
-    ref: ref
-  }, componentsProps.root, {
-    className: clsx(classes.root, className, (_componentsProps$root = componentsProps.root) == null ? void 0 : _componentsProps$root.className)
+  var rootProps = useSlotProps({
+    elementType: Root,
+    externalSlotProps: componentsProps.root,
+    externalForwardedProps: other,
+    additionalProps: {
+      ref: ref
+    },
+    ownerState: props,
+    className: classes.root
   });
-
-  var labelProps = _extends({}, componentsProps.label, {
-    className: clsx(classes.label, (_componentsProps$labe = componentsProps.label) == null ? void 0 : _componentsProps$labe.className)
+  var labelProps = useSlotProps({
+    elementType: Label,
+    externalSlotProps: componentsProps.label,
+    ownerState: props,
+    className: classes.label
   });
-
-  var listProps = _extends({}, componentsProps.list, {
-    className: clsx(classes.list, (_componentsProps$list = componentsProps.list) == null ? void 0 : _componentsProps$list.className)
+  var listProps = useSlotProps({
+    elementType: List,
+    externalSlotProps: componentsProps.list,
+    ownerState: props,
+    className: classes.list
   });
-
   return /*#__PURE__*/_jsxs(Root, _extends({}, rootProps, {
     children: [/*#__PURE__*/_jsx(Label, _extends({}, labelProps, {
       children: props.label
@@ -81,11 +85,6 @@ process.env.NODE_ENV !== "production" ? OptionGroupUnstyled.propTypes
    * @ignore
    */
   children: PropTypes.node,
-
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
 
   /**
    * The component used for the Root slot.
@@ -111,9 +110,9 @@ process.env.NODE_ENV !== "production" ? OptionGroupUnstyled.propTypes
    * @default {}
    */
   componentsProps: PropTypes.shape({
-    label: PropTypes.object,
-    list: PropTypes.object,
-    root: PropTypes.object
+    label: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    list: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   }),
 
   /**
