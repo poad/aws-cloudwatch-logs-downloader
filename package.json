@@ -62,5 +62,9 @@
       "main",
       "renderer/out"
     ]
+  },
+  "resolutions": {
+    "got": ">=12",
+    "minimatch": ">=3.0.5"
   }
 }
